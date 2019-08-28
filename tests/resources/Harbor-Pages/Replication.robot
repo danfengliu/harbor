@@ -49,7 +49,9 @@ Create A New Endpoint
     #input necessary info
     Select From List By Value  ${provider_selector}  ${provider}
     Retry Text Input  xpath=${destination_name_xpath}    ${name}
-    Run Keyword If  '${provider}' != 'docker-hub'  Run keyword  Retry Text Input  xpath=${destination_url_xpath}  ${url}
+    Run Keyword If  '${provider}' == 'harbor'  Run keyword  Retry Text Input  xpath=${destination_url_xpath}  ${url}
+    Run Keyword If  '${provider}' == 'aws-ecr'  Run keyword  Retry Text Input  xpath=${destination_url_xpath}  ${url}
+    Run Keyword If  '${provider}' == 'google-gcr'  Run keyword  Retry Text Input  xpath=${destination_url_xpath}  ${url}
     Retry Text Input  xpath=${destination_username_xpath}  ${username}
     Retry Text Input  xpath=${destination_password_xpath}  ${pwd}
     #cancel verify cert since we use a selfsigned cert
