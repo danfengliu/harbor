@@ -44,8 +44,8 @@ Test Case - Project Level Policy Content Trust
 # Test Case - User View Logs
 #    Harbor API Test  ./tests/apitests/python/test_user_view_logs.py
 # TODO uncomment this after making scan all work with OCI registry
-# Test Case - Scan All Images
-#     Harbor API Test  ./tests/apitests/python/test_scan_all_images.py
+#Test Case - Scan All Images
+#    Harbor API Test  ./tests/apitests/python/test_scan_all_images.py
 # TODO uncomment this after bump up chart API version to v2.0
 # Test Case - List Helm Charts
 #     Harbor API Test  ./tests/apitests/python/test_list_helm_charts.py
@@ -72,4 +72,6 @@ Test Case - Push Index By Docker Manifest
     Harbor API Test  ./tests/apitests/python/test_push_index_by_docker_manifest.py
 Test Case - Push Index By Docker Manifest
     Harbor API Test  ./tests/apitests/python/test_push_chart_by_helm3_chart_cli.py
+Test Case - Push Cnab Bundle
+    Harbor API Test  ./tests/apitests/python/test_push_cnab_bundle.py
 

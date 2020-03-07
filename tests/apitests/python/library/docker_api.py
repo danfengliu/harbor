@@ -149,6 +149,9 @@ class DockerAPI(object):
                 print("build image %s with size %d" % (repo, size))
                 self.DCLIENT.remove_image(repo)
             self.DCLIENT.remove_container(c)
+            self.DCLIENT.pull(repo)
+            image = self.DCLIENT2.images.get(repo)
+            return repo, image.id
         except Exception, err:
             caught_err = True
             if expected_error_message is not None:
