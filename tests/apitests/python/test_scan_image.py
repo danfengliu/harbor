@@ -50,6 +50,8 @@ class TestProjects(unittest.TestCase):
         url = ADMIN_CLIENT["endpoint"]
         user_001_password = "Aa123456"
 
+
+
         #1. Create user-001
         TestProjects.user_scan_image_id, user_scan_image_name = self.user.create_user(user_password = user_001_password, **ADMIN_CLIENT)
 
