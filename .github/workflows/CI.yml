@@ -17,7 +17,6 @@ env:
 
 on:
   pull_request:
-  push:
 
 jobs:
   UTTEST:
@@ -88,8 +87,8 @@ jobs:
     env:
       APITEST_DB: true
     runs-on:
-      #- self-hosted
-      - ubuntu-latest
+      - self-hosted
+      #- ubuntu-latest
     steps:
       - name: Set up Go 1.13
         uses: actions/setup-go@v1
@@ -130,12 +129,12 @@ jobs:
           sudo cp ./tests/harbor_ca.crt /usr/local/share/ca-certificates/
           sudo update-ca-certificates
           sudo service docker restart
-          wget https://get.helm.sh/helm-v3.1.1-linux-386.tar.gz && tar zxvf helm-v3.1.1-linux-386.tar.gz && \
-          sudo mv linux-386/helm /usr/local/bin/helm3 && \
-          helm3 plugin install https://github.com/chartmuseum/helm-push
+          #wget https://get.helm.sh/helm-v3.1.1-linux-386.tar.gz && tar zxvf helm-v3.1.1-linux-386.tar.gz && \
+          #sudo mv linux-386/helm /usr/local/bin/helm3 && \
+          #helm3 plugin install https://github.com/chartmuseum/helm-push
           git clone https://github.com/cnabio/cnab-to-oci.git
           cd cnab-to-oci
-          make
+          make build
           sudo mv bin/cnab-to-oci /usr/local/bin
       - name: install
         run: |

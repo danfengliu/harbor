@@ -77,5 +77,21 @@ class TestProjects(unittest.TestCase):
         self.repo.scan_image(TestProjects.repo_name, tag, **TestProjects.USER_SCAN_IMAGE_CLIENT)
         self.repo.check_image_scan_result(TestProjects.repo_name, tag, **TestProjects.USER_SCAN_IMAGE_CLIENT)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 if __name__ == '__main__':
     unittest.main()
