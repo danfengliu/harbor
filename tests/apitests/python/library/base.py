@@ -76,7 +76,6 @@ def _get_string_from_unicode(udata):
     return result
 
 def run_command(command):
-    print "Command: ", subprocess.list2cmdline(command)
     try:
         output = subprocess.check_output(command,
                                          stderr=subprocess.STDOUT,

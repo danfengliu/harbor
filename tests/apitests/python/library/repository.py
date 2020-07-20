@@ -13,7 +13,6 @@ def pull_harbor_image(registry, username, password, image, tag, expected_login_e
         return
     time.sleep(2)
     ret = _docker_api.docker_image_pull(r'{}/{}'.format(registry, image), tag = tag, expected_error_message = expected_error_message)
-    print ret
 
 def push_image_to_project(project_name, registry, username, password, image, tag, expected_login_error_message = None, expected_error_message = None, profix_for_image = None):
     _docker_api = DockerAPI()
@@ -127,7 +126,6 @@ class Repository(base.Base, object):
         signatures = self.get_repo_signatures(repo_name, **kwargs)
         for each_sign in signatures:
             if each_sign.tag == tag and len(each_sign.hashes["sha256"]) == 44:
-                print "sha256:", len(each_sign.hashes["sha256"])
                 return
         raise Exception(r"Signature of {}:{} is not exist!".format(repo_name, tag))
 
