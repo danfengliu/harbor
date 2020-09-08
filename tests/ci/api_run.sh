@@ -30,7 +30,8 @@ set +e
 docker ps
 # run db auth api cases
 if [ "$1" = 'DB' ]; then
-    robot -X -v ip:$2 -v HARBOR_PASSWORD:Harbor12345 $DIR/../../tests/robot-cases/Group0-BAT/API_DB.robot
+    #robot -X -v ip:$2 -v HARBOR_PASSWORD:Harbor12345 $DIR/../../tests/robot-cases/Group0-BAT/API_DB.robot
+    docker run -i --privileged -v $DIR/../../:/drone -v $DIR/../../:/ca -w /drone goharbor/harbor-drone-engine:2.0.5 robot -v ip:$2  -v ip1: -v HARBOR_PASSWORD:Harbor12345 /drone/tests/robot-cases/Group1-Nightly/Setup.robot /drone/tests/robot-cases/Group0-BAT/API_DB.robot
 elif [ "$1" = 'LDAP' ]; then
     # run ldap api cases
     python $DIR/../../tests/configharbor.py -H $IP -u $HARBOR_ADMIN -p $HARBOR_ADMIN_PASSWD -c auth_mode=ldap_auth \

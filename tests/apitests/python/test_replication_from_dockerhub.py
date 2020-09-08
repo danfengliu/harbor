@@ -27,7 +27,7 @@ class TestProjects(unittest.TestCase):
     def tearDown(self):
         print("Case completed")
 
-    @unittest.skipIf(TEARDOWN == False, "Test data won't be erased.")
+    @unittest.skipIf(TEARDOWN == True, "Test data won't be erased.")
     def test_ClearData(self):
         #1. Delete rule(RA);
         self.replication.delete_replication_rule(TestProjects.rule_id, **ADMIN_CLIENT)
@@ -94,7 +94,7 @@ class TestProjects(unittest.TestCase):
         self.replication.trigger_replication_executions(TestProjects.rule_id, **ADMIN_CLIENT)
 
         #7. Wait for completion of this replication job;
-        self.replication.wait_until_jobs_finish(TestProjects.rule_id, **ADMIN_CLIENT)
+        self.replication.wait_until_jobs_finish(TestProjects.rule_id,interval=30, **ADMIN_CLIENT)
 
         #8. Check image is replicated into target project successfully.
         artifact = self.artifact.get_reference_info(TestProjects.project_name, self.image, self.tag, **ADMIN_CLIENT)
