@@ -74,3 +74,5 @@ jobs:
           gsutil cp ./distribution-spec/conformance/report.html gs://harbor-conformance-test/report.html
           gsutil acl ch -u AllUsers:R gs://harbor-conformance-test/report.html
         if: always()
+
+
