@@ -6,6 +6,13 @@ import subprocess
 import client
 import swagger_client
 import v2_swagger_client
+
+#DOCKER_USER = os.environ.get('DOCKER_USER', 'danfengliu')
+#DOCKER_PWD = os.environ.get('DOCKER_PWD', 'Aa123456')
+
+DOCKER_USER = os.environ.get('DOCKER_USER', 'danieljt')
+DOCKER_PWD = os.environ.get('DOCKER_PWD', 'harborharbor')
+
 try:
     from urllib import getproxies
 except ImportError:

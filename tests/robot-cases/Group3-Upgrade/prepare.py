@@ -607,7 +607,7 @@ with open("data.json") as f:
     data = json.load(f)
 
 def pull_image(*image):
-    os.system("docker login -u danfengliu -p Aa123456")
+    os.system("docker login -u danieljt -p harborharbor")
     for i in image:
         print("docker pulling image: ", i)
         os.system("docker pull "+i)
@@ -650,6 +650,7 @@ def do_data_creation():
 
     harborAPI.push_artifact_index(data["projects"][0]["name"], data["projects"][0]["artifact_index"]["name"], data["projects"][0]["artifact_index"]["tag"], version=args.version)
     push_image_to_project(data["projects"][0]["name"], args.endpoint, 'admin', 'Harbor12345', "busybox", "latest")
+    pull_image("busybox", "redis", "haproxy", "alpine", "httpd:2")
     push_image("busybox", data["projects"][0]["name"])
     push_signed_image("alpine", data["projects"][0]["name"], "latest")
 

@@ -3,6 +3,7 @@
 import base
 import subprocess
 import json
+from base import DOCKER_USER, DOCKER_PWD
 
 try:
     import docker
@@ -83,8 +84,12 @@ class DockerAPI(object):
     def docker_login(self, registry, username, password, expected_error_message = None):
         if expected_error_message is "":
             expected_error_message = None
+
+        if registry == "docker":
+            registry = None
         try:
-            self.DCLIENT.login(registry = registry, username=username, password=password)
+            ret = self.DCLIENT.login(registry = registry, username=username, password=password)
+            print("docker login ret:", ret)
         except docker.errors.APIError as err:
             if expected_error_message is not None:
                 print( "docker login error:", str(err))
@@ -103,7 +108,11 @@ class DockerAPI(object):
         caught_err = False
         ret = ""
         try:
-            self.DCLIENT.pull(r'{}:{}'.format(image, _tag))
+            print("DOCKER_USER:", DOCKER_USER )
+            print("DOCKER_PWD:", DOCKER_PWD )
+            self.docker_login("docker", DOCKER_USER, DOCKER_PWD)
+            ret = self.DCLIENT.pull(r'{}:{}'.format(image, _tag))
+            print("pull ret:", ret )
             return ret
         except Exception as err:
             caught_err = True
@@ -163,6 +172,7 @@ class DockerAPI(object):
         try:
             baseimage='busybox:latest'
             if not self.DCLIENT.images(name=baseimage):
+                self.DCLIENT.login(username=DOCKER_USER, password=DOCKER_PWD)
                 self.DCLIENT.pull(baseimage)
             c=self.DCLIENT.create_container(image='busybox:latest',command='dd if=/dev/urandom of=test bs=1M count=%d' % size )
             self.DCLIENT.start(c)
