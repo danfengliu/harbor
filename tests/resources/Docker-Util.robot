@@ -38,6 +38,8 @@ Pull image
 Push image
     [Arguments]  ${ip}  ${user}  ${pwd}  ${project}  ${image}
     Log To Console  \nRunning docker push ${image}...
+    ${rc}  ${output}=  Run And Return Rc And Output  docker login -u ${DOCKER_USER} -p ${DOCKER_PWD}
+    Log To Console  ${output}
     ${rc}  ${output}=  Run And Return Rc And Output  docker pull ${image}
     Log  ${output}
     Should Be Equal As Integers  ${rc}  0
@@ -51,9 +53,11 @@ Push image
     ${rc}=  Run And Return Rc  docker logout ${ip}
 
 Push Image With Tag
-#tag1 is tag of image on docker hub,default latest,use a version existing if you do not want to use latest    
+#tag1 is tag of image on docker hub,default latest,use a version existing if you do not want to use latest
     [Arguments]  ${ip}  ${user}  ${pwd}  ${project}  ${image}  ${tag}  ${tag1}=latest
     Log To Console  \nRunning docker push ${image}...
+    ${rc}  ${output}=  Run And Return Rc And Output  docker login -u ${DOCKER_USER} -p ${DOCKER_PWD}
+    Log To Console  ${output}
     ${rc}  ${output}=  Run And Return Rc And Output  docker pull ${image}:${tag1}
     Log  ${output}
     Should Be Equal As Integers  ${rc}  0
