@@ -3,6 +3,7 @@ ENV LANG C.UTF-8
 # V 2.0
 # V 2.0.1: upgrade docker to version 19.03.12
 # V 2.5 Add support for e2e py-test
+# V 2.5.2 upgrade docker to 20
 
 RUN apt-get update && apt-get install -y --no-install-recommends wget curl gnupg2
 RUN apt-get install libseccomp2
@@ -87,8 +88,9 @@ RUN wget https://storage.googleapis.com/cri-containerd-release/cri-containerd-${
     tar --no-overwrite-dir -C / -xzf cri-containerd-${CONTAINERD_VERSION}.linux-amd64.tar.gz
 
 # Install docker, docker compose
-RUN wget https://download.docker.com/linux/static/stable/x86_64/docker-19.03.12.tgz && \
-    tar --strip-components=1 -xvzf docker-19.03.12.tgz -C /usr/bin &&  \
+ENV DOCKER_VERSION 20.10.0
+RUN wget https://download.docker.com/linux/static/stable/x86_64/docker-$DOCKER_VERSION.tgz && \
+    tar --strip-components=1 -xvzf docker-$DOCKER_VERSION.tgz -C /usr/bin &&  \
     curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && \
     chmod +x /usr/local/bin/docker-compose
 
