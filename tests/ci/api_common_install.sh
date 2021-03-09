@@ -15,10 +15,6 @@ python --version
 pip -V
 cat /etc/issue
 cat /proc/version
-sudo apt-get update -y && sudo apt-get install -y  python3.6
-sudo rm /usr/bin/python && sudo ln -s /usr/bin/python3.6 /usr/bin/python
-sudo apt-get install -y python3-pip
-pip -V
 sudo -H pip install --ignore-installed urllib3 chardet requests --upgrade
 python --version
 
